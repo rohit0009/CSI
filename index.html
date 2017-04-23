@@ -1,0 +1,196 @@
+<html>
+	<head>
+        <title> Login </title>
+		<script Language="JavaScript">
+
+      function login() {
+          
+          var uname = document.forms["F1"]["uname"].value;
+          var pname = document.forms["F1"]["pname"].value;
+
+		  
+          var f = 0;
+          var err = "";
+          if (uname == "" || pname == "") {
+              f = 1;
+              err = err + "Enter Login Details";
+          }
+          if (f == 1) {
+              alert(err);
+          }
+          else {
+			
+              /*document.F1.action = "processLogin.asp?uname=" + uname + "&pname=" + pname;
+              document.F1.submit();*/
+              var xhttp = new XMLHttpRequest();
+              var op = "";
+              xhttp.onreadystatechange = function () {
+                  if (this.readyState == 4 && this.status == 200) {
+                      op = this.responseText;
+                      if (op != "1") {
+                          document.F1.method = "POST";
+                          document.F1.action = "Home.asp";
+                          document.F1.submit();
+                      }
+                      else if (op == "1") {
+                          alert("Login details incorrect");
+                      }
+                  }
+              };
+              xhttp.open("POST", "processLogin.asp?uname=" + uname + "&pname=" + pname, false);
+              xhttp.send();
+          }
+      }
+
+      function validate() {
+          var fname = document.forms["F2"]["fname"].value;
+          var lname = document.forms["F2"]["lname"].value;
+          var userid = document.forms["F2"]["userid"].value;
+          var rpassword = document.forms["F2"]["rpassword"].value;
+          var newpassword = document.forms["F2"]["newpassword"].value;
+          var day = document.forms["F2"]["day"].value;
+          var month = document.forms["F2"]["month"].value;
+          var year = document.forms["F2"]["year"].value;
+          var sex = document.forms["F2"]["sex"].value;
+          var email = document.forms["F2"]["email"].value;
+          var err = "";
+          var f = 0;
+
+		
+          if (fname == "" || lname == "" || userid == "" || rpassword == "" || newpassword == "" || day == "day" || month == "month" || year == "year" || email == "") {
+              f = 1;
+              err = err + "Please fill all the above fields";
+          }
+          else {
+              if (newpassword.length < 8) {
+                  f = 1;
+                  err = err + " Length of password should be more than 8 letters,";
+              }
+              if (!(/[A-Z]+/.test(newpassword))) {
+                  f = 1;
+                  err = err + " Password should contain uppercase  letter";
+              }
+              if (!(/[a-z]+/.test(newpassword))) {
+                  f = 1;
+                  err = err + " Password should contain lowercase  letter";
+              }
+              if (!(newpassword == rpassword)) {
+                  f = 1;
+                  err = err + " Password doesnot match";
+              }
+              if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email))) {
+                  f = 1;
+                  err = err + " Email id is not valid";
+              }
+          }
+          if (f == 1) {
+              alert(err);
+              uname.value = "";
+              pname.value = "";
+              return false;
+          }
+          else {
+              document.F2.method = "post";
+              document.F2.action = "processSignup.asp?opr=signup&fname=" + fname + "&lname=" + lname + "&userid=" + userid + "&newpassword=" + newpassword + "&day=" + day + "&month=" + month + "&year=" + year + "&sex=" + sex + "&email=" + email;
+              document.F2.submit();
+          }
+      }
+		</script>
+		
+        <link rel = "stylesheet" type ="text/css" media = "screen and (max-device-width: 1600px)" href="indexpage.css">
+			
+	</head>
+	<body >
+		
+			<div id="wrapper">
+				<div id="head">
+					<div id = "title" style="font-size:200%;">
+						Computer Store Inventory Management System
+					</div>
+					<div id = "logindiv">
+						<form method ="post" name ="F1" >
+							<table >
+								<tr>
+									<td style = "font-size:85%;color:#FFFFFF;"> User Id </td><td></td><td></td> <td style = "color:#FFFFFF;font-size:85%;">Password</td>
+								</tr>
+								<tr>
+									<td><input type = "text" name ="uname" class ="textfield"></td><td></td><td></td><td><input type = "password" name ="pname" class ="textfield"> </td> <td></td><td></td><td><input type = "button" value ="Log In" style="background-color:#85e085;" onclick="login()"></td>
+								</tr>
+                                
+							</table>
+                            
+						</form>
+					</div>
+				</div>
+                <div id = "info" style="background-image: url('images/computer-technology-887177.jpg')">
+                    
+                </div>
+				<div id = signupdiv>
+					<p style="font-size:170%;">Signup for Employee</p>
+					<form name = "F2" >
+						
+						<table>
+							<tr>
+								<td><input type = "text" name ="fname" class ="textfield1" placeholder = "First Name"></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td ><input type = "text" name ="lname" class ="textfield1" placeholder = "Last Name"></td>
+							</tr>
+							<tr>
+								<td colspan= 5><input type = "email" class ="textfield1" name="email" placeholder="E-mail Id" required></td>
+							</tr>
+							<tr>
+								<td colspan = 5><input type = "text" name = "userid" class = "textfield1" placeholder = "User ID"></td>
+							
+							</tr>
+							<tr>
+								<td colspan = 5><input type = "password" name = "newpassword" class = "textfield1" placeholder = "Password"></td>
+							
+							</tr>
+							<tr>
+								<td colspan = 5><input type = "password" name = "rpassword" class = "textfield1" placeholder = "Retype Password"></td>
+							
+							</tr>
+						</table>
+                        <p style="font-size:130%">Gender</p>
+
+						<table>
+						<tr><td><input type ="radio" name = "sex" value = "m">Male</input></td><td></td><td><input type ="radio" name = "sex" value = "f">Female</input></td>
+						</tr>
+						</table>
+
+                        
+                        <p style="font-size:130%">Birthday</p>
+						<table >
+							<tr>
+								<td>
+									<select name="day">
+										<option value="1">1</option><option value="2">2</option><option value="3">3</option ><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option>
+									</select>
+								</td>
+								<td>
+									<select name="month">
+										<option value="01">Jan</option><option value="02">Feb</option><option value="03">Mar</option><option value="04">Apr</option><option value="05">May</option><option value="06">Jun</option><option value="07">Jul</option><option value="08">Aug</option><option value="09">Sep</option><option value="10">Oct</option><option value="11">Nov</option><option value="12">Dec</option>
+									</select>
+								</td>
+								<td>
+									<select name = "year">
+                                        <option>1980</option><option>1981</option><option>1982</option><option>1983</option><option>1984</option>
+                                        <option>1985</option><option>1986</option><option>1987</option><option>1988</option><option>1989</option>
+                                        <option>1990</option><option>1991</option><option>1992</option><option>1993</option><option>1994</option>
+										<option>1995</option><option>1996</option><option>1997</option><option>1998</option><option>1999</option><option>2000</option>
+									</select>
+								</td>
+							</tr>
+						</table>
+						<p style="font-size:14px;">By clicking Create an account, you agree to<br/>our Terms and conditions</p>
+						
+						<input type = "button" value = "Create an account" style = "font-size:25px;width:50%;height:10%;background-color:#85e085;" onclick="validate()">
+						
+					</form>
+				</div>
+			</div>
+		
+	</body>
+</html>

@@ -1,0 +1,70 @@
+body {
+}
+            #wrapper {
+                position: absolute;
+                width: 1400px;
+                height: 750px;
+                top: 0%;
+                left: 0%;
+                background: url("images/main-bg.jpg");
+                background-color: #98bcc1;
+            }
+            #head {
+                overflow: hidden;
+                position: relative;
+                background-color: #0d1522;
+                height: 100px;
+                width: 1400px;
+                top: 0%;
+                left: 0%;
+            }
+            #info
+            {
+                position: absolute;
+                width:500px;
+                height: 330px;
+                top: 170px;
+                left: 100px;
+                background-color: #808080;
+            }
+			#logindiv
+			{
+				position:absolute;
+				
+				height:120px;
+				width:500px;
+				right:9%;
+				top:18%;
+			}
+			#title
+			{
+				position:absolute;
+				top: 25%;
+				left: 5%;
+				color:#FFFFFF;
+			}
+			#signupdiv
+			{
+				position:relative;
+				height:500px;
+				width:40%;
+				
+			    top: 2%;
+				left:750px;
+			}
+			.textfield
+			{
+				width:104%;
+				height:25px;
+			    
+			}
+			.textfield1
+			{
+				width:104%;
+				height:35px;
+                
+			}
+            a:link,a:visited
+            {
+                color: #fff;
+            }
